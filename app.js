@@ -1,33 +1,40 @@
-let value=document.querySelector(".value");
-console.log(value.innerText);
+const value = document.querySelector(".value");
+const incrementBtn = document.querySelector(".increment");
+const decrementBtn = document.querySelector(".decrement");
+const resetBtn = document.querySelector(".reset");
+const themeToggle = document.querySelector(".theme-toggle");
+let count = 0;
 
+// Update the display value
+function updateDisplay() {
+  value.innerText = count;
+  value.style.transform = "scale(1.2)";
+  setTimeout(() => (value.style.transform = "scale(1)"), 150);
+}
 
+// Increment
+incrementBtn.addEventListener("click", () => {
+  count++;
+  updateDisplay();
+});
 
-let incrementt=document.querySelector("#increment");
+// Decrement (won’t go below zero)
+decrementBtn.addEventListener("click", () => {
+  if (count > 0) {
+    count--;
+    updateDisplay();
+  }
+});
 
-let decrement=document.querySelector("#decrement");
+// Reset
+resetBtn.addEventListener("click", () => {
+  count = 0;
+  updateDisplay();
+});
 
-let reset=document.querySelector(".reset");
-
-
-
-incrementt.addEventListener("click",()=>{
- let final=+(value.innerText)
- final++;
- value.innerText=final;
-   
-})
-
-decrement.addEventListener("click",()=>{
- let final=+(value.innerText);
-    if(final>0){
-    final--;
-    value.innerText=final;
-    }
-})
-
-reset.addEventListener("click",()=>{
-    let final=+(value.innerText);
-    final=0;
-    value.innerText=final;
-})
+// Theme toggle (Dark/Light Mode)
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  themeToggle.textContent =
+    document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
